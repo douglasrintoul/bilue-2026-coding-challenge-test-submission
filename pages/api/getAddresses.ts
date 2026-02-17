@@ -30,7 +30,9 @@ export default async function handle(
    *  is all digits and non negative
    */
   const isStrictlyNumeric = (value: string) => {
-    return true;
+    // This is a regular expression that tests from the start of the string (^) that all characters are digits (\d),
+    // which will automatically reject negatice numbers, decimals, or any non-numeric value
+    return /^\d+$/.test(value);
   };
 
   /** TODO: Refactor the code below so there is no duplication of logic for postCode/streetNumber digit checks. */
