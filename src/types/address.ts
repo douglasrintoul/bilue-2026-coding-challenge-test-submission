@@ -7,3 +7,11 @@ export interface Address {
   postcode: string;
   street: string;
 }
+
+export interface AddressBookFormFields {
+  postCode: string;
+  houseNumber: string;
+  firstName: string;
+  lastName: string;
+  selectedAddress: string;
+}
