@@ -99,7 +99,7 @@ function App() {
           Create your own address book!
           <br />
           <small>
-            Enter an address by postcode add personal info and done! 👏
+            Enter an address by postcode, add personal info, and done! 👏
           </small>
         </h1>
 
