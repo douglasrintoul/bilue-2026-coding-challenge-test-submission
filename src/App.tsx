@@ -28,7 +28,7 @@ function App() {
   const [error, setError] = React.useState<undefined | string>(undefined);
   const [addresses, setAddresses] = React.useState<AddressType[]>([]);
   const [addressesLoading, setAddressesLoading] = React.useState<boolean>(false);
-  const [personalInfoLoading, setPersonalInfoLoading] = React.useState<boolean>(false);
+
   /**
    * Redux actions
    */
@@ -157,7 +157,7 @@ function App() {
         {fields.selectedAddress && (
           <Form 
             label="✏️ Add personal info to address"
-            loading={personalInfoLoading}
+            loading={false}
             formEntries={[
               {
                 name: "firstName",
