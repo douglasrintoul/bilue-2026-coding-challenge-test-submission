@@ -1,5 +1,6 @@
 import { ButtonType, ButtonVariant } from "@/types";
-import React, { FunctionComponent, useMemo } from "react";
+import React, { FunctionComponent } from "react";
+import cx from "classnames";
 
 import $ from "./Button.module.css";
 import Spinner from "../Spinner/Spinner";
@@ -19,20 +20,12 @@ const Button: FunctionComponent<ButtonProps> = ({
   variant = "primary",
   loading = false,
 }) => {
-  const variantClass = useMemo(() => {
-    switch (variant) {
-      case "primary":
-        return $.primary;
-      case "secondary":
-        return $.secondary;
-      default:
-        console.warn(`Unknown button variant ${variant}, defaulting to primary.`);
-        return $.primary;
-    }
-  }, [variant]);
   return (
     <button
-      className={`${$.button} ${variantClass}`}
+      className={cx($.button, {
+        [$.primary]: variant === "primary",
+        [$.secondary]: variant === "secondary",
+      })}
       type={type}
       onClick={onClick}
     >
