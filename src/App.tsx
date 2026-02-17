@@ -65,7 +65,7 @@ function App() {
       );
       setAddresses(transformedAddresses);
     } catch (e) {
-      setError("An error occured while searching for addresses. Please try again.");
+      setError("An error occurred while searching for addresses. Please try again.");
     } finally {
       setAddressesLoading(false);
     }

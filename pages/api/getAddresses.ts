@@ -28,7 +28,7 @@ export default async function handle(
 
   const isStrictlyNumeric = (value: string) => {
     // This is a regular expression that tests from the start of the string (^) that all characters are digits (\d),
-    // which will automatically reject negatice numbers, decimals, or any non-numeric value
+    // which will automatically reject negative numbers, decimals, or any non-numeric value
     return /^\d+$/.test(value);
   };
 
