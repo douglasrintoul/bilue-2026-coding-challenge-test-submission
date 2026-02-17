@@ -11,6 +11,7 @@ import { Address as AddressType, AddressBookFormFields } from "./types";
 import transformAddress, { RawAddressModel } from "./core/models/address";
 import Form from "@/components/Form/Form";
 import Spinner from "@/components/Spinner/Spinner";
+import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
 
 function App() {
   const { fields, handleChange, clearFields } = useFormFields<AddressBookFormFields>({
@@ -146,7 +147,6 @@ function App() {
             );
           })}
 
-        {/* TODO: Create generic <Form /> component to display form rows, legend and a submit button  */}
         {fields.selectedAddress && (
           <Form 
             label="✏️ Add personal info to address"
@@ -174,8 +174,7 @@ function App() {
           />
         )}
 
-        {/* TODO: Create an <ErrorMessage /> component for displaying an error message */}
-        {error && <div className="error">{error}</div>}
+        {error && <ErrorMessage message={error} />}
 
         {/* TODO: Add a button to clear all form fields. 
         Button must look different from the default primary button, see design. 
@@ -183,6 +182,7 @@ function App() {
         On Click, it must clear all form fields, remove all search results and clear all prior
         error messages
         */}
+        
       </Section>
 
       <Section variant="dark">
