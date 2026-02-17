@@ -26,9 +26,6 @@ export default async function handle(
     });
   }
 
-  /** TODO: Implement the validation logic to ensure input value
-   *  is all digits and non negative
-   */
   const isStrictlyNumeric = (value: string) => {
     // This is a regular expression that tests from the start of the string (^) that all characters are digits (\d),
     // which will automatically reject negatice numbers, decimals, or any non-numeric value
