@@ -11,7 +11,7 @@ import { Address as AddressType, AddressBookFormFields } from "./types";
 import Form from "@/components/Form/Form";
 
 function App() {
-  const { fields, handleChange } = useFormFields<AddressBookFormFields>({
+  const { fields, handleChange, clearFields } = useFormFields<AddressBookFormFields>({
     postCode: "",
     houseNumber: "",
     firstName: "",
@@ -40,14 +40,17 @@ function App() {
    * - Bonus: Add a loading state in the UI while fetching addresses
    */
   const handleAddressSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
+    const url = `${process.env.NEXT_PUBLIC_URL}/api/getAddresses`;
     e.preventDefault();
   };
 
-  /** TODO: Add basic validation to ensure first name and last name fields aren't empty
-   * Use the following error message setError("First name and last name fields mandatory!")
-   */
   const handlePersonSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!fields.firstName || !fields.firstName.length || !fields.lastName || !fields.lastName.length) {
+      setError("First name and last name fields mandatory!");
+      return;
+    }
 
     if (!fields.selectedAddress || !addresses.length) {
       setError(
