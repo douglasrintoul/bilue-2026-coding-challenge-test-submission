@@ -1,7 +1,8 @@
 import { ButtonType, ButtonVariant } from "@/types";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useMemo } from "react";
 
 import $ from "./Button.module.css";
+import Spinner from "../Spinner/Spinner";
 
 interface ButtonProps {
   onClick?: () => void;
@@ -18,16 +19,28 @@ const Button: FunctionComponent<ButtonProps> = ({
   variant = "primary",
   loading = false,
 }) => {
+  const variantClass = useMemo(() => {
+    switch (variant) {
+      case "primary":
+        return $.primary;
+      case "secondary":
+        return $.secondary;
+      default:
+        console.warn(`Unknown button variant ${variant}, defaulting to primary.`);
+        return $.primary;
+    }
+  }, [variant]);
   return (
     <button
-      // TODO: Add conditional classNames
-      // - Must have a condition to set the '.primary' className
-      // - Must have a condition to set the '.secondary' className
-      // - Display loading spinner per demo video. NOTE: add data-testid="loading-spinner" for spinner element (used for grading)
-      className={$.button}
+      className={`${$.button} ${variantClass}`}
       type={type}
       onClick={onClick}
     >
+      {loading && <>
+        <div style={{"display": "inline-block", "paddingRight": "5px"}}>
+          <Spinner />
+        </div>
+      </>}
       {children}
     </button>
   );
