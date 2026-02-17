@@ -13,10 +13,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-/* TODO: Make application responsive. It is already for the most part, but it is not optimal for smaller screens.
-* - Making the application responsive using the Mobile First principle.
-*/
-
 :root {
   --border-radius-default: 4px;
   --border-radius-xl: 15px;
@@ -37,13 +33,23 @@ code {
 
 body {
   accent-color: var(--color-brand);
-  font-size: 18px;
+  font-size: 16px;
   font-family: var(--font-primary);
   background: var(--color-accent);
 }
 
 main {
-  padding: 2rem;
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 18px;
+  }
+
+  main {
+    padding: 2rem;
+  }
 }
 
 small {
