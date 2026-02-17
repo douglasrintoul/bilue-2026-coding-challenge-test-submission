@@ -8,6 +8,7 @@ import useAddressBook from "@/hooks/useAddressBook";
 import useFormFields from "@/hooks/useFormFields";
 
 import { Address as AddressType, AddressBookFormFields } from "./types";
+import transformAddress, { RawAddressModel } from "./core/models/address";
 import Form from "@/components/Form/Form";
 
 function App() {
@@ -40,8 +41,34 @@ function App() {
    * - Bonus: Add a loading state in the UI while fetching addresses
    */
   const handleAddressSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
-    const url = `${process.env.NEXT_PUBLIC_URL}/api/getAddresses`;
     e.preventDefault();
+    setAddresses([]);
+    setError(undefined);
+    setAddressesLoading(true);
+
+    const url = `${process.env.NEXT_PUBLIC_URL}/api/getAddresses?postcode=${fields.postCode}&streetnumber=${fields.houseNumber}`;
+    try {
+      const result = await fetch(url);
+      const response = await result.json();
+
+      if (response.status === "error") {
+        setError(response.errormessage);
+        return;
+      }
+
+      const transformedAddresses = response.details.map(
+        (item: RawAddressModel) =>
+          transformAddress({
+            ...item,
+            houseNumber: fields.houseNumber,
+          })
+      );
+      setAddresses(transformedAddresses);
+    } catch (e) {
+      setError("An error occured while searching for addresses. Please try again.");
+    } finally {
+      setAddressesLoading(false);
+    }
   };
 
   const handlePersonSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {

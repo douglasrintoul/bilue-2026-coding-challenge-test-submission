@@ -28,6 +28,8 @@ const generateMockAddresses = (postcode: string, streetNumber: string) => {
   const postcodeMapping: string = (postCodeToCityMapping as any)[postcodeFirstChar];
   const streetMapping: string = (streetNumberToStreetMapping as any)[streetNumberFirstChar];
 
+  // NOTE: The longitude key here has been changed from "long" to "lon" to match the address model which
+  // is marked as "DO NOT MODIFY".
   if (postcodeMapping) {
     return [
       {
@@ -36,7 +38,7 @@ const generateMockAddresses = (postcode: string, streetNumber: string) => {
         postcode,
         street: `${streetNumber} ${streetMapping}`,
         lat: Math.random(),
-        long: Math.random()
+        lon: Math.random()
       },
       {
         city: postcodeMapping,
@@ -44,7 +46,7 @@ const generateMockAddresses = (postcode: string, streetNumber: string) => {
         postcode,
         street: `${streetNumber} ${streetMapping}`,
         lat: Math.random(),
-        long: Math.random()
+        lon: Math.random()
       },
       {
         city: postcodeMapping,
@@ -52,7 +54,7 @@ const generateMockAddresses = (postcode: string, streetNumber: string) => {
         postcode,
         street: `${streetNumber} ${streetMapping}`,
         lat: Math.random(),
-        long: Math.random()
+        lon: Math.random()
       }
     ];
   }
