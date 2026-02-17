@@ -2,13 +2,10 @@ import React from "react";
 
 import Address from "@/components/Address/Address";
 import AddressBook from "@/components/AddressBook/AddressBook";
-import Button from "@/components/Button/Button";
-import InputText from "@/components/InputText/InputText";
 import Radio from "@/components/Radio/Radio";
 import Section from "@/components/Section/Section";
 import useAddressBook from "@/hooks/useAddressBook";
 
-import styles from "./App.module.css";
 import { Address as AddressType } from "./types";
 import Form from "@/components/Form/Form";
 
