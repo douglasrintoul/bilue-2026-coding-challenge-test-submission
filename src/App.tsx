@@ -2,6 +2,7 @@ import React from "react";
 
 import Address from "@/components/Address/Address";
 import AddressBook from "@/components/AddressBook/AddressBook";
+import Button from "@/components/Button/Button";
 import Radio from "@/components/Radio/Radio";
 import Section from "@/components/Section/Section";
 import useAddressBook from "@/hooks/useAddressBook";
@@ -32,6 +33,12 @@ function App() {
    * Redux actions
    */
   const { addAddress } = useAddressBook();
+
+  const handleClearFields = () => {
+    clearFields();
+    setAddresses([]);
+    setError(undefined);
+  };
 
   const handleAddressSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -176,12 +183,9 @@ function App() {
 
         {error && <ErrorMessage message={error} />}
 
-        {/* TODO: Add a button to clear all form fields. 
-        Button must look different from the default primary button, see design. 
-        Button text name must be "Clear all fields"
-        On Click, it must clear all form fields, remove all search results and clear all prior
-        error messages
-        */}
+        <Button variant="secondary" onClick={handleClearFields}>
+          Clear all fields
+        </Button>
         
       </Section>
 
