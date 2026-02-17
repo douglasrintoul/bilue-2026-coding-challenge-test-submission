@@ -10,6 +10,7 @@ import useFormFields from "@/hooks/useFormFields";
 import { Address as AddressType, AddressBookFormFields } from "./types";
 import transformAddress, { RawAddressModel } from "./core/models/address";
 import Form from "@/components/Form/Form";
+import Spinner from "@/components/Spinner/Spinner";
 
 function App() {
   const { fields, handleChange, clearFields } = useFormFields<AddressBookFormFields>({
@@ -31,15 +32,6 @@ function App() {
    */
   const { addAddress } = useAddressBook();
 
-  /** TODO: Fetch addresses based on houseNumber and postCode using the local BE api
-   * - Example URL of API: ${process.env.NEXT_PUBLIC_URL}/api/getAddresses?postcode=1345&streetnumber=350
-   * - Ensure you provide a BASE URL for api endpoint for grading purposes!
-   * - Handle errors if they occur
-   * - Handle successful response by updating the `addresses` in the state using `setAddresses`
-   * - Make sure to add the houseNumber to each found address in the response using `transformAddress()` function
-   * - Ensure to clear previous search results on each click
-   * - Bonus: Add a loading state in the UI while fetching addresses
-   */
   const handleAddressSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     setAddresses([]);
@@ -134,6 +126,12 @@ function App() {
           submitText="Find"
         />
    
+        {addressesLoading && (
+          <div style={{ display: "flex", justifyContent: "center", fontSize: "40px" }}>
+            <Spinner colour="var(--color-brand)" />
+          </div>
+        )}
+
         {addresses.length > 0 &&
           addresses.map((address) => {
             return (
